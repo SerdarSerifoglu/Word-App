@@ -1,8 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../components/core/Button";
 import { Input } from "../components/core/Input";
 import "./login.css";
+import { loginForm, changeLoginForm } from "../store/auth/authSlice";
 const Login = () => {
+	const dispatch = useDispatch();
+	const stateLoginForm = useSelector(loginForm);
+
+	useEffect(() => {
+		console.log("stateLoginForm_changed", stateLoginForm);
+	}, [stateLoginForm]);
+
 	const [formData, setFormData] = useState({
 		email: "",
 		username: "",
@@ -18,6 +27,7 @@ const Login = () => {
 
 	const loginClick = (e) => {
 		console.log("Click Login Button");
+		dispatch(changeLoginForm(formData));
 	};
 
 	return (
