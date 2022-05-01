@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Button } from "../components/core/Button";
 import { Input } from "../components/core/Input";
-import "./login.css";
-const Login = () => {
+import "./register.css";
+const Register = () => {
 	const [formData, setFormData] = useState({
 		email: "",
 		username: "",
@@ -16,18 +16,26 @@ const Login = () => {
 		});
 	};
 
-	const loginClick = (e) => {
-		console.log("Click Login Button");
+	const registerClick = (e) => {
+		console.log("Click Register Button");
 	};
 
 	return (
-		<div className="login-form">
+		<div className="register-form">
+			<div className="form-element">
+				<label>Username</label>
+				<Input
+					type="text"
+					onChange={handleChange("username")}
+					value={formData.username}
+				></Input>
+			</div>
 			<div className="form-element">
 				<label>Email</label>
 				<Input
 					type="text"
 					onChange={handleChange("email")}
-					value={formData.name}
+					value={formData.email}
 				></Input>
 			</div>
 			<div className="form-element">
@@ -39,13 +47,13 @@ const Login = () => {
 				></Input>
 			</div>
 			<Button
-				textValue="Login"
-				className="login-button"
-				onClick={loginClick}
+				textValue="Register"
+				className="register-button"
+				onClick={registerClick}
 			></Button>
-			{/* <button className="login-button">Login</button> */}
+			{/* <button className="register-button">Register</button> */}
 		</div>
 	);
 };
 
-export default Login;
+export default Register;

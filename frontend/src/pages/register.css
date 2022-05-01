@@ -1,0 +1,12 @@
+.register-form {
+	display: grid;
+	grid-template-columns: 1fr;
+}
+
+.form-element {
+	margin-bottom: 10px;
+}
+
+.register-button {
+	width: 100%;
+}
