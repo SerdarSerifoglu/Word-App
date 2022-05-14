@@ -48,7 +48,8 @@ UserSchema.pre("save", async function preSave(next) {
 });
 
 UserSchema.methods.comparePassword = async function comparePassword(candidate) {
-	return bcrypt.compare(candidate, this.password);
+	console.log("model", { pass: this.password, candidate });
+	return await bcrypt.compare(candidate, this.password);
 };
 
 /* Mongoose da içi içe giden objelerin sınırını belirlemeye yarar */
