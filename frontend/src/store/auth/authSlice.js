@@ -1,7 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
+export const login = createAsyncThunk("auth/login", async (loginForm) => {
+	const res = await axios.post(`http://localhost:4000/auth/login`, loginForm);
+	return res.data;
+});
+
+export const logout = createAsyncThunk("auth/login", async (loginFrm) => {
+	const res = await axios.get(`http://localhost:4000/auth/logout`);
+	return res.data;
+});
 const initialState = {
 	loginForm: {},
+	user: {},
 };
 
 const authSlice = createSlice({
@@ -13,7 +24,11 @@ const authSlice = createSlice({
 			state.loginForm = action.payload;
 		},
 	},
-	extraReducers: {},
+	extraReducers: {
+		[login.fulfilled]: (state, action) => {
+			console.log("fulfilled", action.payload);
+		},
+	},
 });
 
 export const loginForm = (state) => state.auth.loginForm;

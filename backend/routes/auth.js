@@ -22,7 +22,7 @@ router.post("/login", async (req, res) => {
 	}
 	console.log("login_user", user);
 	console.log("login", req.session);
-	res.json(req.session);
+	res.json(req.sessionID);
 });
 
 router.get("/logout", async (req, res) => {

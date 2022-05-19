@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../components/core/Button";
 import { Input } from "../components/core/Input";
 import "./login.css";
-import { loginForm, changeLoginForm } from "../store/auth/authSlice";
+import { loginForm, changeLoginForm, login } from "../store/auth/authSlice";
 const Login = () => {
 	const dispatch = useDispatch();
 	const stateLoginForm = useSelector(loginForm);
@@ -14,7 +14,6 @@ const Login = () => {
 
 	const [formData, setFormData] = useState({
 		email: "",
-		username: "",
 		password: "",
 	});
 
@@ -25,9 +24,10 @@ const Login = () => {
 		});
 	};
 
-	const loginClick = (e) => {
+	const loginClick = async (e) => {
 		console.log("Click Login Button");
-		dispatch(changeLoginForm(formData));
+		await dispatch(changeLoginForm(formData));
+		await dispatch(login(formData));
 	};
 
 	return (

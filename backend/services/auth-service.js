@@ -12,7 +12,8 @@ class AuthService extends BaseService {
 			const passOk = await user.comparePassword(password);
 			console.log("login_passOk", passOk);
 			if (passOk) {
-				return user;
+				const returnUser = await this.find(user._id);
+				return returnUser;
 			}
 		}
 	}
