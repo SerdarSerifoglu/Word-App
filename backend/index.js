@@ -6,25 +6,24 @@ const indexRouter = require("./routes/index.js");
 const authRouter = require("./routes/auth.js");
 require("./mongo-connection");
 const session = require("express-session");
-const MongoDBStore = require("connect-mongodb-session")(session);
+const MongoStore = require("connect-mongo");
+require("dotenv").config();
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 // app.use(express.static(path.join(__dirname, "build"))); // yaptığı iş dirname ile public ismini bağlamak
 
-const store = new MongoDBStore({
-	uri: "mongodb+srv://srdr:2N6S2RpNNarg5gA6@serdar.gfnxk.mongodb.net/WordAPP?retryWrites=true&w=majority",
-	collection: "sessions",
-});
-
 app.use(
 	session({
 		secret: "my secret key",
 		resave: false,
-		saveUninitialized: false,
+		saveUninitialized: true,
 		cookie: { maxAge: 1 * 24 * 60 * 60 * 1000, secure: true },
-		store: store,
+		store: MongoStore.create({
+			mongoUrl: process.env.DB_ADDRESS,
+			collection: "sessions",
+		}),
 	})
 );
 
