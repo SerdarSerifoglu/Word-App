@@ -28,7 +28,7 @@ const UserSchema = new mongoose.Schema(
 			type: String,
 			minlength: [6, "Please provide a password with min lenght 6"],
 			required: [true, "Please provide a password"],
-			select: false, //Bu sayede user bilgisi çekildiği zaman password bilgisinin görünmemesi sağlanmış oldu.
+			// select: false, //Bu sayede user bilgisi çekildiği zaman password bilgisinin görünmemesi sağlanmış oldu.
 			trim: true,
 		},
 	},

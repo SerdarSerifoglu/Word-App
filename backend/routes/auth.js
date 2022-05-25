@@ -1,4 +1,5 @@
 const { authService } = require("../services");
+const passport = require("passport");
 
 const router = require("express").Router();
 
@@ -8,6 +9,7 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+	console.log("SERDAR", req.body);
 	const user = await authService.insert(req.body);
 
 	res.json(user);
@@ -29,6 +31,10 @@ router.get("/logout", async (req, res) => {
 	console.log("logout", req.session);
 	req.session.destroy((err) => console.log(err));
 	console.log("logout_after", req.session);
+});
+
+router.post("/login_pass", passport.authenticate("local"), function (req, res) {
+	res.send("<div>Serdar</div>");
 });
 
 module.exports = router;

@@ -7,6 +7,7 @@ const authRouter = require("./routes/auth.js");
 require("./mongo-connection");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
+const passport = require("passport");
 require("dotenv").config();
 
 const app = express();
@@ -26,6 +27,17 @@ app.use(
 		}),
 	})
 );
+
+require("./config/passport");
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use((req, res, next) => {
+	console.log("Global middleware run");
+	console.log("Session", req.session);
+	console.log("UserData", req.user);
+	next();
+});
 
 app.use("/", indexRouter);
 app.use("/auth", authRouter);
